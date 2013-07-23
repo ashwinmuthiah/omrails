@@ -13,7 +13,9 @@
 			</p>
 			<% if current_user == @pin.user %>
 				<%= link_to 'Edit', edit_pin_path(@pin) %> |
-				<%= link_to 'Back', pins_path %>
+				<%# this is how to link to previous page from pagination %>
+				<%= link_to 'Back', :back %> |
+				<%= link_to 'Destroy', @pin, method: :delete, data: { confirm: 'Are you sure?' } %>
 			<% end %>
 		</div>
 	</div>
