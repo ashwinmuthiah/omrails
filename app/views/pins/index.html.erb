@@ -3,3 +3,8 @@
 <div id="pins">
   <%= render @pins %>
 </div>
+
+<div class="pagination pagination-centered">
+	<%# Gives links to pages with rest of pictures %>
+	<%= will_paginate @pins %>
+</div>

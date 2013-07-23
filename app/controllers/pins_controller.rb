@@ -7,7 +7,8 @@ class PinsController < ApplicationController
   def index
     # Replace Pin.all with Pin.order to display in a certain order
     # In this case, descending by created_at
-    @pins = Pin.order("created_at desc")
+    # .page.... pagination. displays 20 per page. Look at index to see rest
+    @pins = Pin.order("created_at desc").page(params[:page]).per_page(20)
 
     respond_to do |format|
       format.html # index.html.erb
