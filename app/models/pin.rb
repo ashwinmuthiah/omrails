@@ -1,5 +1,5 @@
 class Pin < ActiveRecord::Base
-  attr_accessible :description, :image
+  attr_accessible :description, :image, :image_remote_url
   #Validates a pin before it can be created. At least must be present, etc.
   #See more validations at rails validations on google
 
@@ -14,6 +14,14 @@ class Pin < ActiveRecord::Base
   #Paper clip allows you to style the image, see below.
   belongs_to :user
   has_attached_file :image, styles: { medium: "320x240>"}
-  
- 
+
+  def image_remote_url=(url_value) 
+    # self refers to pin
+    # url_value.blank? -> if url_value is blank, then the pin will come from
+    # an upoaded image
+    self.image = URI.parse(url_value) unless url_value.blank?
+    # this method already exists, super ensures that all those functions
+    # still happen on top of what we are adding here
+    super
+  end
 end
