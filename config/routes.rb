@@ -1,11 +1,15 @@
 Omrails::Application.routes.draw do
+  get "users/show"
+
   resources :pins
 
 
   devise_for :views
 
   devise_for :users
-
+  # Map the link users/'id' with the users controller, show page
+  # Has to come after devise_for :users
+  match 'users/:id' => 'users#show', as: :user
   get 'about' => 'pages#about'
 
   root :to => 'pins#index'
