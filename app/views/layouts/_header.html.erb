@@ -1,5 +1,4 @@
 
-
 <div class="navbar navbar-fixed-top">
   <div class="navbar-inner">
     <div class="container">
@@ -23,8 +22,11 @@
 				<ul class = "nav pull-right">
           <% if user_signed_in? %>
             <li><%= link_to "Add +", new_pin_path%></li>
-            <li><%= link_to "View Profile", current_user %></li>
-            <li><%#= link_to "Edit Profile", edit_user_registration_path %></li>
+            <% if controller.controller_name == 'users' && controller.action_name == 'show' && params[:id] == current_user.id.to_s %>
+              <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+            <% else %>
+              <li><%= link_to "View Profile", current_user %></li>
+            <% end %>
           <%# Have to add method: :delete for logging out b/c it's specific something%>
             <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
           <% else %>
